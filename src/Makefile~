@@ -1,0 +1,4 @@
+##Variables
+CFLAGS=-Wall -g
+CC=gcc
+TARGET=listar
