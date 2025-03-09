@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+
+#include "listar.h"
+
+int es_directorio(char ruta[]){
+  int resultado=stat(ruta,&s);
+  if (resultado<0){
+    perror("stat");
+    return 0;
+  }
+
+  if (S_ISDIR(s.st_mode)){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+int buscar(char directorio[],char patron[]){
+  return 0;
+}
+

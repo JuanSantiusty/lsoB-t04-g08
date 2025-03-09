@@ -2,14 +2,33 @@
 #include <stdlib.h>
 #include <dirent.h>
 
-int main(int argc, char * argv[]) {
+#include "listar.h"
+
+int main(int argc,char *ruta[],char *patron[]) {
     struct dirent *ent;
-    DIR *dir = opendir(".");  /* Abre el directorio actual*/
+
+    /**
+     * @brief Validacion, si el programa recibe un numero de argumentos distinto de 3 finaliza la ejecución
+     */
     
-    if (argc != 2) {
-		fprintf(stderr, "Debe especificar:./listar <nombre_dir>\n");
+    if (argc != 3) {
+		fprintf(stderr, "Debe especificar:./listar <nombre_dir> <patron_arch> \n");
 		exit(EXIT_FAILURE);
 	}
+    
+    /**
+     * @brief Validación, verificar si el directorio existe
+     */
+
+    if (es_directorio(ruta[1])==1) {
+      printf("Si es un directorio");
+    }else{
+      printf("No es un directorio");
+      exit(EXIT_FAILURE);
+    }
+
+     DIR *dir = opendir(".");  /* Abre el directorio actual*/
+    
 
     if (dir == NULL) {
         perror("No se pudo abrir el directorio");
