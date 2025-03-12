@@ -21,24 +21,24 @@ int main(int argc,char *ruta[],char *patron[]) {
      */
 
     if (es_directorio(ruta[1])==1) {
-      printf("Si es un directorio");
+      printf("Si es un directorio\n");
     }else{
-      printf("No es un directorio");
+      printf("No es un directorio\n");
       exit(EXIT_FAILURE);
     }
-
-     DIR *dir = opendir(".");  /* Abre el directorio actual*/
     
+    int resultado = buscar(ruta[1], ruta[2]);
 
-    if (dir == NULL) {
-        perror("No se pudo abrir el directorio");
-        return 1;
+    if (resultado == -1) {
+        // Ocurrió un error en la búsqueda
+        fprintf(stderr, "Ocurrió un error buscando en %s\n", ruta[1]);
+        return EXIT_FAILURE;
+    } else if (resultado == 0) {
+        // No se encontraron archivos que contengan el patrón
+        printf("No hay archivos con el nombre especificado.\n");
     }
 
-    while ((ent = readdir(dir)) != NULL) {
-        printf("Nombre de la entrada: %s\n", ent->d_name);
-    }
-
-    closedir(dir);
+    return EXIT_SUCCESS;
+    
     return 0;
 }  
